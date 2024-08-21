@@ -24,6 +24,11 @@ var opts = {
   headers: request.headers,
 };
 
+// If not communicating directly with AWS service, we can assume a custom domain api gateway
+if (request.host.indexOf("amazonaws.com") < 0) {
+  opts.service = "execute-api";
+}
+
 var awsObj = aws4.sign(opts, {
   accessKeyId: variables.get(awsRoleName + "_AKI"),
   secretAccessKey: variables.get(awsRoleName + "_SAK"),
