@@ -27,6 +27,9 @@ var opts = {
 // If not communicating directly with AWS service, we can assume a custom domain api gateway
 if (request.host.indexOf("amazonaws.com") < 0) {
   opts.service = "execute-api";
+} else if (request.host.indexOf("s3.amazonaws.com") > 0) {
+  opts.service = "s3";
+  opts.region = "us-east-1";
 }
 
 var awsObj = aws4.sign(opts, {
