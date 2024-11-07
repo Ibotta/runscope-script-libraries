@@ -10,5 +10,6 @@ if(targetHost) {
     // Get the path after the hostname
     const path = originalUrl.path();
     
+    // Update the request URL with the TARGET_HOST and leave the rest of the path as is.
     request.url = `${targetHost}${path}`;
 }
